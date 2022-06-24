@@ -18,8 +18,8 @@ class HashMap:
             raise StopIteration
 
     def hash(self, key, coll_count = 0):
-        # print('\nNow inside HashMap object')
-        # print(f'Assigning/retrieving the game {key} to {self}')
+        print('\nNow inside HashMap object')
+        print(f'Assigning/retrieving the game {key} to {self}')
         key_bytes = key.encode()
         hash_code = sum(key_bytes)
         return hash_code + coll_count
@@ -29,11 +29,11 @@ class HashMap:
 
     def assign(self, key, value):
         index = self.compressor(self.hash(key))
-        # print(f'Assigning game to index {index}')
+        print(f'Assigning game to index {index}')
         current_array_value = self.array[index]
         if current_array_value == None:
             self.array[index] = [key, value]
-            # print('Assignment complete')
+            print('Assignment complete')
             self.empty == False
             return
 
