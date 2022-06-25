@@ -33,7 +33,7 @@ class Main:
                 self.by_rating()
         
         else:
-            print('Thank you for using VGdb!')
+            print('\nThank you for using VGdb!')
 
     def start(self):
         print('Welcome to the VGdb v1.0b')
@@ -50,7 +50,9 @@ class Main:
             name_map.assign(game, values)
 
         name = input('\nEnter a part of the name of the game you are lookng for: ')
-        results = findname(name, names)
+        name_list = names.copy()
+        results = []
+        results = findname(name, name_list, matching_list=results)
         
         if results == []:
             return '\nCouldn\'t find with any game matching your search query!'
@@ -109,6 +111,8 @@ Release date: {list_of_games[0][1]}
    Platforms: {list_of_games[0][4]}
 ''')
                     list_of_games.pop(0)
+    
+        self.cont()
             
 
 
