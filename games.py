@@ -6,7 +6,7 @@ ws.xlsx_to_dict('games.xlsx')
 
 games = ws.sheet_items
 genres = ['Action', 'Adventure', 'RPG', 'Shooter', 'Puzzle', 'Platformer', 'Indie']
-platforms = ['PC', 'Playstation', 'Xbox', 'Nintendo', 'Android']
+platforms = ['PC', 'Playstation', 'Xbox', 'Nintendo', 'Android', 'iOS']
 del ws
 
 new_dict = {}

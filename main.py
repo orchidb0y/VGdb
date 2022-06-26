@@ -13,7 +13,7 @@ class Main:
     def get_option(self):
         print('''
 1) Search by name
-2) Search by rating (not implemented)
+2) Search by rating
 3) Search by release date (not implemented)
 4) Search by genre (not implemented)
 5) Search by platform (not implemented)''')
@@ -49,7 +49,10 @@ class Main:
         for game, values in games.items():
             name_map.assign(game, values)
 
-        name = input('\nEnter a part of the name of the game you are lookng for: ')
+        name = input('\nEnter a part of the name of the game you are looking for (min 3 characters): ')
+        while len(name) < 3:
+            name = input('Please enter a minimum of three characters: ')
+
         name_list = names.copy()
         results = []
         results = findname(name, name_list, matching_list=results)
@@ -79,6 +82,8 @@ Release date: {value[1]}
         
         rating = input('''\nThe program will return a list of 10 games that have equal or higher metacritic score.
 Pick a rating from 1-100: ''')
+        while int(rating) > 100 or int(rating) < 1:
+            rating = input('Please enter a number between 1-100: ')
 
         list_of_games = rating_map.retrieve(rating)
         current_list = len(list_of_games)
