@@ -95,6 +95,8 @@ Release date: {list_of_games[0][1]}
 
         while remaining > 0:
             rating = int(rating) + 1
+            if rating == 101:
+                break
             list_of_games = rating_map.retrieve(rating)
             while len(list_of_games) > remaining:
                 list_of_games.pop()
