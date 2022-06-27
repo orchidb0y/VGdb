@@ -13,7 +13,7 @@ def findname(name, name_list, starting_index = 0, char = 0, match_count = 0, mat
 
         # If exhausts all characters on game but matches with last character
         if starting_index + 1 == len(game) and name[char].lower() != game[starting_index].lower():
-            print(f'{name} doesn\'t match {game}, moving to next game in the list: {name_list[1]}')
+            # print(f'{name} doesn\'t match {game}, moving to next game in the list: {name_list[1]}')
             name_list.pop(0)
             findname(name, name_list, matching_list = matching_list)
             break

@@ -46,6 +46,8 @@ class Main:
     
     def by_name(self):
         name_map = HashMap(500)
+        games = linked_games.dictify()
+
         for game, values in games.items():
             name_map.assign(game, values)
 
@@ -76,6 +78,8 @@ Release date: {value[1]}
 
     def by_rating(self):
         rating_map = RatingMap()
+        games = linked_games.dictify()
+        
         for game, values in games.items():
             if values[2] != 'None':
                 rating_map.assign(values[2], values)
