@@ -1,18 +1,13 @@
-from sheet2dict import Worksheet
-from linkedlist import LinkedList
+import csv
 
-ws = Worksheet()
-ws.xlsx_to_dict('games.xlsx')
+fields = ['Name', 'Release date', 'Rating', 'Genres', 'Platforms']
+games = []
+with open('games.csv') as game_csv:
+    reader = csv.DictReader(game_csv, fields)
+    for row in reader:
+        games.append(row)
 
-games = ws.sheet_items
-genres = ['Action', 'Adventure', 'RPG', 'Shooter', 'Puzzle', 'Platformer', 'Indie']
-platforms = ['PC', 'Playstation', 'Xbox', 'Nintendo', 'Android', 'iOS']
-
-linked_games = LinkedList()
-names = []
-for game in games:
-    topics = list(game.values())
-    linked_games.insert_beginning({topics[0]: [topics[0], topics[1], topics[2], topics[3], topics[4]]})
-    names.append(topics[0])
-
-del ws
+for dic in games:
+    for i in range(3, 5):
+        new_value = dic.get(fields[i]).split()
+        dic[fields[i]] = new_value
