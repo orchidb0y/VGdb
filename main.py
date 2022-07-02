@@ -46,16 +46,15 @@ class Main:
     
     def by_name(self):
         name_map = HashMap(500)
-        games = linked_games.dictify()
 
-        for game, values in games.items():
-            name_map.assign(game, values)
+        for game in games:
+            name_map.assign(game['Name'], list(game.values()))
 
         name = input('\nEnter a part of the name of the game you are looking for (min 3 characters): ')
         while len(name) < 3:
             name = input('Please enter a minimum of three characters: ')
 
-        name_list = names.copy()
+        name_list = [game['Name'] for game in games]
         results = []
         results = findname(name, name_list, matching_list=results)
         
@@ -78,11 +77,9 @@ Release date: {value[1]}
 
     def by_rating(self):
         rating_map = RatingMap()
-        games = linked_games.dictify()
         
-        for game, values in games.items():
-            if values[2] != 'None':
-                rating_map.assign(values[2], values)
+        for game in games:
+            rating_map.assign(game['Rating'], list(game.values()))
         
         rating = input('''\nThe program will return a list of 10 games that have equal or higher metacritic score.
 Pick a rating from 1-100: ''')
