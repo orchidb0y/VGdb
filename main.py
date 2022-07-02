@@ -4,6 +4,7 @@ from hashmap import *
 from games import *
 from findname import *
 from ratingmap import *
+from datemap import *
 
 class Main:
 
@@ -14,7 +15,7 @@ class Main:
         print('''
 1) Search by name
 2) Search by rating
-3) Search by release date (not implemented)
+3) Search by release date
 4) Search by genre (not implemented)
 5) Search by platform (not implemented)''')
 
@@ -43,6 +44,8 @@ class Main:
             self.by_name()
         if opt == '2':
             self.by_rating()
+        if opt == '3':
+            self.by_release()
     
     def by_name(self):
         name_map = HashMap(500)
@@ -122,7 +125,40 @@ Release date: {list_of_games[0][1]}
     
         self.cont()
             
+    def by_release(self):
+        datemap = DateMap()
 
+        for game in games:
+            datemap.assign(game['Release date'], list(game.values()))
+
+        date_search = input('''\nThe program will return 10 games released on the release date or later.
+Enter a date in the YYYY-MM-DD format (e.g. 1994-11-25): ''')
+
+        while True:
+                try:
+                    date_parts = date_search.split('-')
+
+                    while 1980 > int(date_parts[0]) or int(date_parts[0]) > 2022:
+                        date_search = input('''\nThe date you entered is not valid. Only dates between 1980 and 2022 (included) are valid.
+Remember to enter a date in the YYYY-MM-DD format: ''')
+
+                    date_search = date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
+                    break
+                except ValueError:
+                    date_search = input('''\nSome value you entered is incorrect.
+Remember to enter a date in the YYYY-MM-DD format: ''')
+
+
+        list_of_games = datemap.retrieve(date_search)
+
+        for game in list_of_games:
+            print(f'''
+        Name: {game[0]}
+Release date: {game[1]}
+      Rating: {game[2]}
+      Genres: {game[3]}
+   Platforms: {game[4]}
+''')
 
 
 system('cls' if osname == 'nt' else 'clear')
