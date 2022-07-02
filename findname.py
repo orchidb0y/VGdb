@@ -11,17 +11,10 @@ def findname(name, name_list, starting_index = 0, char = 0, match_count = 0, mat
         # print(f'Comparing {name[char]}')   
         # print(f'To {game[starting_index].lower()}')
 
-        # If exhausts all characters on game but matches with last character
+        # No match on last character
         if starting_index + 1 == len(game) and name[char].lower() != game[starting_index].lower():
             # print(f'{name} doesn\'t match {game}, moving to next game in the list: {name_list[1]}')
             name_list.pop(0)
-            findname(name, name_list, matching_list = matching_list)
-            break
-
-        # If gets to last character, gets a match but not with the whole search pattern
-        elif starting_index + 1 == len(game) and name[char].lower() == game[starting_index].lower() and match_count != name_length:
-            if name_list != []:
-                name_list.pop(0)
             findname(name, name_list, matching_list = matching_list)
             break
 
@@ -36,6 +29,11 @@ def findname(name, name_list, starting_index = 0, char = 0, match_count = 0, mat
                 matching_list.append(game)
                 print(f'Added {game} to the match list: {matching_list}')
                 print(f'Search list is now {name_list}')
+                findname(name, name_list, matching_list = matching_list)
+                break
+            elif starting_index + 1 == len(game) and match_count != name_length:
+                if name_list != []:
+                    name_list.pop(0)
                 findname(name, name_list, matching_list = matching_list)
                 break
             else:
