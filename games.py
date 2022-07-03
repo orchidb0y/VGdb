@@ -2,6 +2,7 @@ import csv
 from datetime import date
 
 fields = ['Name', 'Release date', 'Rating', 'Genres', 'Platforms']
+genres = ['Action', 'Adventure', 'RPG', 'Shooter', 'Puzzle']
 games = []
 with open('games.csv') as game_csv:
     reader = csv.DictReader(game_csv, fields)
