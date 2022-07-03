@@ -3,6 +3,8 @@ from linkedlist import *
 from datetime import date
 from random import shuffle
 
+# This class stores the games from the main database in order of release year from 1980 to 2022. Each year uses a linkedlist to store games released in that year.
+
 class DateMap:
 
     def __init__(self):
@@ -16,16 +18,11 @@ class DateMap:
 
     def assign(self, release_date, values):
         index = self.get_index(release_date)
-        print(f'\nIndex to be used is {index}')
-        print(f'Assigning game to index {index}')
         current_array_linkedlist = self.array[index]
-        print('Assigning to LinkedList', current_array_linkedlist, 'at index', self.array.index(current_array_linkedlist))
-        print(f'Value to be used is {values}')
         current_array_linkedlist.insert_beginning(values)
 
     def retrieve(self, release_date):
         index = self.get_index(release_date)
-        print(f'\nRetrieving LinkedList from index {index} onwards')
 
         list_of_games = []
         current_node = self.array[index].get_head_node()

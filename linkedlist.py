@@ -1,3 +1,6 @@
+# These are regular linkedlist and node classes, used by datemap.py, ratingmap.py.
+# It's also used on search by genre and platform to store games for each platform/genre in their own list before retrieval.
+
 class Node:
 
 
@@ -25,7 +28,6 @@ class LinkedList:
         return self.head_node
   
     def insert_beginning(self, new_value):
-        print(f'\nInserting {new_value} into linked list')
         new_node = Node(new_value)
         new_node.set_next_node(self.head_node)
         self.head_node = new_node

@@ -1,3 +1,7 @@
+# This search algorithm will use recursion to return a list of games that match a search pattern.
+# For example, is the search pattern is "god", it will append to the matching list all games that contain the pattern "god",
+# such as the game "God of War".
+
 def findname(name, name_list, starting_index = 0, char = 0, match_count = 0, matching_list = []):
     if name_list == []:
         return matching_list
@@ -7,35 +11,29 @@ def findname(name, name_list, starting_index = 0, char = 0, match_count = 0, mat
 
     while True:
 
-        print(f'\nMatch count:', {match_count}, 'Name length:', {name_length}, 'Char:', {char}, 'Starting index', {starting_index}, 'Game:', {game}, 'Game length:', {len(game)})
-        # print(f'Comparing {name[char]}')   
-        # print(f'To {game[starting_index].lower()}')
-
         # No match on last character
         if starting_index + 1 == len(game) and name[char].lower() != game[starting_index].lower():
-            # print(f'{name} doesn\'t match {game}, moving to next game in the list: {name_list[1]}')
             name_list.pop(0)
             findname(name, name_list, matching_list = matching_list)
             break
 
-        # If there is a match
+        # Match on current character
         elif name[char].lower() == game[starting_index].lower():
-            print(f'Found a match at index {starting_index}')
             match_count += 1
 
+            # If it has found a match for the whole pattern
             if match_count == name_length:
-                print(f'\nMoving to next game in the list')
                 name_list.pop(0)
                 matching_list.append(game)
-                print(f'Added {game} to the match list: {matching_list}')
-                print(f'Search list is now {name_list}')
                 findname(name, name_list, matching_list = matching_list)
                 break
+            # If it gets to last character of the game's name and it hasn't matched with the whole pattern
             elif starting_index + 1 == len(game) and match_count != name_length:
                 if name_list != []:
                     name_list.pop(0)
                 findname(name, name_list, matching_list = matching_list)
                 break
+            # If it hasn't gotten to the last character yet
             else:
                 char += 1
                 starting_index += 1
