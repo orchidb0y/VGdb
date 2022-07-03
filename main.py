@@ -185,16 +185,15 @@ Release date: {game[1]}
             for genre in game['Genres']:
                 genre_list[genre].insert_beginning(game)
         
-        pick = input(f'\nChoose a genre from this list: {genres}. Enter your choice: ')
+        pick = input(f'\nChoose a genre from this list: {genres}. Enter your choice: ').title()
 
         while True:
             if pick in genres:
                 break
             else:
                 pick = input(f'''\nYou picked an invalid genre. Please enter a genre in this list: {genres}.
-Enter your choice: ''')
+Enter your choice: ''').title()
         
-        píck = pick.title()
         print('\nThe game will return 10 games that match the genre you picked.')
         remaining = 10
         list_of_games = []
@@ -232,16 +231,15 @@ Release date: {game['Release date']}
             for platform in game['Platforms']:
                 platform_list[platform].insert_beginning(game)
         
-        pick = input(f'\nChoose a platform from this list: {platforms}. Enter your choice: ')
+        pick = input(f'\nChoose a platform from this list: {platforms}. Enter your choice: ').title()
 
         while True:
-            if pick.title() in platforms:
+            if pick in platforms:
                 break
             else:
                 pick = input(f'''\nYou picked an invalid platform. Please enter a platform in this list: {platforms}.
-Enter your choice: ''')
+Enter your choice: ''').title()
 
-        pick = pick.title()
         print('\nThe game will return 10 games that match the platform you picked.')
         remaining = 10
         list_of_games = []
