@@ -18,7 +18,7 @@ class Main:
 2) Search by rating
 3) Search by release date
 4) Search by genre
-5) Search by platform (not implemented)''')
+5) Search by platform''')
 
         return input('\nEnter a number from 1 to 5: ')
     
@@ -37,12 +37,13 @@ class Main:
                 self.by_release()
             if opt == '4':
                 self.by_genre()
+            if opt == '5':
+                self.by_platform()
         
         else:
             print('\nThank you for using VGdb!')
 
     def start(self):
-        print('Welcome to the VGdb v1.0b')
         opt = self.get_option()
 
         if opt == '1':
@@ -53,6 +54,11 @@ class Main:
             self.by_release()
         if opt == '4':
             self.by_genre()
+        if opt == '5':
+            self.by_platform()
+        if opt not in ['1', '2', '3', '4', '5']:
+            print('You entered an invalid choice. Try again.')
+            self.start()
     
     def by_name(self):
         name_map = HashMap(500)
@@ -188,6 +194,7 @@ Release date: {game[1]}
                 pick = input(f'''\nYou picked an invalid genre. Please enter a genre in this list: {genres}.
 Enter your choice: ''')
         
+        píck = pick.title()
         print('\nThe game will return 10 games that match the genre you picked.')
         remaining = 10
         list_of_games = []
@@ -215,7 +222,55 @@ Release date: {game['Release date']}
 
         self.cont()
 
+    def by_platform(self):
+        platform_list = {}
+
+        for platform in platforms:
+            platform_list[platform] = LinkedList()
+        
+        for game in games:
+            for platform in game['Platforms']:
+                platform_list[platform].insert_beginning(game)
+        
+        pick = input(f'\nChoose a platform from this list: {platforms}. Enter your choice: ')
+
+        while True:
+            if pick.title() in platforms:
+                break
+            else:
+                pick = input(f'''\nYou picked an invalid platform. Please enter a platform in this list: {platforms}.
+Enter your choice: ''')
+
+        pick = pick.title()
+        print('\nThe game will return 10 games that match the platform you picked.')
+        remaining = 10
+        list_of_games = []
+
+        current_node = platform_list[pick].get_head_node()
+        list_of_games.append(current_node.value)
+        remaining -= 1
+
+        while remaining > 0:
+            current_node = current_node.get_next_node()
+            if current_node.value != None:
+                list_of_games.append(current_node.value)
+                remaining -= 1
+            else:
+                break
+        
+        for game in list_of_games:
+            print(f'''
+        Name: {game['Name']}
+Release date: {game['Release date']}
+      Rating: {game['Rating']}
+      Genres: {game['Genres']}
+   Platforms: {game['Platforms']}
+''')
+
+        self.cont()
+
 
 
 system('cls' if osname == 'nt' else 'clear')
+print('Welcome to the VGdb v1.0b')
 main = Main()
