@@ -22,9 +22,11 @@ class HashMap:
         print(f'Assigning/retrieving the game {key} to {self}')
         key_bytes = key.encode()
         hash_code = sum(key_bytes)
+        print(f'Hash is {hash_code + coll_count}')
         return hash_code + coll_count
 
     def compressor(self, hash_code):
+        print(f'Index is {hash_code % self.size}')
         return hash_code % self.size
 
     def assign(self, key, value):
@@ -39,12 +41,14 @@ class HashMap:
 
         coll_count = 1
         while current_array_value[0] != key:
+            print(f'Had {coll_count} colisions so far')
             new_index = self.compressor(self.hash(key, coll_count))
             current_array_value = self.array[new_index]
             if current_array_value == None:
                 self.array[new_index] = [key, value]
                 self.empty == False
                 return
+            coll_count += 1
     
     def retrieve(self, key):
         index = self.compressor(self.hash(key))
@@ -59,3 +63,4 @@ class HashMap:
             possible_value = self.array[new_index]
             if possible_value[0] == key:
                 return possible_value[1]
+            coll_count += 1
