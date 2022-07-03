@@ -1,5 +1,6 @@
 from os import system
 from os import name as osname
+from random import shuffle
 from hashmap import *
 from games import *
 from findname import *
@@ -195,21 +196,21 @@ Release date: {game[1]}
 Enter your choice: ''').title()
         
         print('\nThe game will return 10 games that match the genre you picked.')
-        remaining = 10
         list_of_games = []
 
         current_node = genre_list[pick].get_head_node()
         list_of_games.append(current_node.value)
-        remaining -= 1
 
-        while remaining > 0:
+        while True:
             current_node = current_node.get_next_node()
             if current_node.value != None:
                 list_of_games.append(current_node.value)
-                remaining -= 1
             else:
                 break
 
+        shuffle(list_of_games)
+        list_of_games = list_of_games[:10]
+        
         for game in list_of_games:
             print(f'''
         Name: {game['Name']}
@@ -241,21 +242,21 @@ Release date: {game['Release date']}
 Enter your choice: ''').title()
 
         print('\nThe game will return 10 games that match the platform you picked.')
-        remaining = 10
         list_of_games = []
 
         current_node = platform_list[pick].get_head_node()
         list_of_games.append(current_node.value)
-        remaining -= 1
 
-        while remaining > 0:
+        while True:
             current_node = current_node.get_next_node()
             if current_node.value != None:
                 list_of_games.append(current_node.value)
-                remaining -= 1
             else:
                 break
         
+        shuffle(list_of_games)
+        list_of_games = list_of_games[:10]
+
         for game in list_of_games:
             print(f'''
         Name: {game['Name']}
