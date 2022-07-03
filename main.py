@@ -104,28 +104,25 @@ Pick a rating from 1-100: ''')
             rating = input('Please enter a number between 1-100: ')
 
         list_of_games = rating_map.retrieve(rating)
-        remaining = 10
         shuffle(list_of_games)
-        while True:
-            list_of_games = list_of_games[:10]
-            remaining = remaining - len(list_of_games)
-            if list_of_games != []:
-                for game in list_of_games:
-                    print(f'''
+        list_of_games = list_of_games[:10]
+        remaining = 10 - len(list_of_games)
+
+        for game in list_of_games:
+            print(f'''
         Name: {game[0]}
 Release date: {game[1]}
       Rating: {game[2]}
       Genres: {game[3]}
    Platforms: {game[4]}
 ''')
-            if len(list_of_games) < 10:
-                break
 
         while remaining > 0:
             rating = int(rating) + 1
             if rating == 101:
                 break
             list_of_games = rating_map.retrieve(rating)
+            shuffle(list_of_games)
             list_of_games = list_of_games[:10]
             remaining = remaining - len(list_of_games)
             if list_of_games != []:

@@ -1,28 +1,28 @@
 from hashmap import *
+from linkedlist import *
+
+# This class is used to store games from the main database based on rating.
+# There is a linkedlist for each rating, and games with the same rating are stored in these linkedlists.
 
 class RatingMap:
 
     def __init__(self):
-        self.array = [HashMap(20) for item in range(101)]
+        self.array = [LinkedList() for rating in range(101)]
 
-    def assign(self, key, value):
-        index = int(key)
-        print(f'\nAssigning game to index {index}')
-        current_array_hashmap = self.array[index]
-        print('Assigning to hashmap', current_array_hashmap, 'at index', self.array.index(current_array_hashmap))
-        print(f'Key to be used is {value[0]} and value is {value}')
-        current_array_hashmap.assign(value[0], value)
+    def assign(self, rating, value):
+        index = int(rating)
+        current_array_linkedlist = self.array[index]
+        current_array_linkedlist.insert_beginning(value)
 
-    def retrieve(self, key):
-        index = int(key)
-        print(f'\nRetrieving hashmap from index {index}')
+    def retrieve(self, rating):
+        index = int(rating)
         return_hashmap = self.array[index]
-        print(f'Retrieving from hashmap', return_hashmap, 'at index', index)
 
         list_of_games = []
+        current_node = self.array[index].get_head_node()
 
-        for game in return_hashmap:
-            if game != None:
-                list_of_games.append(game[1])
+        while current_node.get_value() != None:
+            list_of_games.append(current_node.get_value())
+            current_node = current_node.get_next_node()
         
         return list_of_games
