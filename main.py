@@ -17,7 +17,7 @@ class Main:
         print('''
 1) Search by name
 2) Search by rating
-3) Search by release date
+3) Search by release year
 4) Search by genre
 5) Search by platform''')
 
@@ -146,28 +146,46 @@ Release date: {game[1]}
         for game in games:
             datemap.assign(game['Release date'], list(game.values()))
 
-        date_search = input('''\nThe program will return 10 games released on the release date or later.
-Enter a date in the YYYY-MM-DD format (e.g. 1994-11-25): ''')
+        date_search = input('''\nThe program will return 10 games released on the release year or later.
+Enter a year in the YYYY format (e.g. 1994): ''')
+        date_input = date_search
 
         while True:
                 try:
-                    date_parts = date_search.split('-')
+                    while 1980 > int(date_input) or int(date_input) > 2022:
+                        date_search = input('''\nThe date you entered is not valid. Only years between 1980 and 2022 (included) are valid.
+Remember to enter a date in the YYYY format: ''')
 
-                    while 1980 > int(date_parts[0]) or int(date_parts[0]) > 2022:
-                        date_search = input('''\nThe date you entered is not valid. Only dates between 1980 and 2022 (included) are valid.
-Remember to enter a date in the YYYY-MM-DD format: ''')
-
-                    date_search = date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
+                    date_search = date(int(date_input), 1, 1)
                     break
                 except ValueError:
-                    date_search = input('''\nSome value you entered is incorrect.
-Remember to enter a date in the YYYY-MM-DD format: ''')
-
+                    date_input = input('''\nSome value you entered is incorrect.
+Remember to enter a date in the YYYY format: ''')
 
         list_of_games = datemap.retrieve(date_search)
+        shuffle(list_of_games)
+        list_of_games = list_of_games[:10]
+        remaining = 10 - len(list_of_games)
 
         for game in list_of_games:
             print(f'''
+        Name: {game[0]}
+Release date: {game[1]}
+      Rating: {game[2]}
+      Genres: {game[3]}
+   Platforms: {game[4]}
+''')
+
+        while remaining > 0:
+            date_input = int(date_input) + 1
+            date_search = date(date_input, 1, 1)
+            list_of_games = datemap.retrieve(date_search)
+            shuffle(list_of_games)
+            list_of_games = list_of_games[:remaining]
+            remaining = remaining - len(list_of_games)
+
+            for game in list_of_games:
+                print(f'''
         Name: {game[0]}
 Release date: {game[1]}
       Rating: {game[2]}
