@@ -2,8 +2,11 @@ import csv
 from datetime import date
 
 fields = ['Name', 'Release date', 'Rating', 'Genres', 'Platforms']
-genres = ['Action', 'Adventure', 'RPG', 'Shooter', 'Puzzle']
+
+genres = ['Action', 'Adventure', 'Rpg', 'Shooter', 'Puzzle']
+platforms = ['Pc', 'Playstation', 'Xbox', 'Nintendo']
 games = []
+
 with open('games.csv') as game_csv:
     reader = csv.DictReader(game_csv, fields)
     for row in reader:
