@@ -3,8 +3,8 @@ from datetime import date
 
 fields = ['Name', 'Release date', 'Rating', 'Genres', 'Platforms']
 
-genres = ['Action', 'Adventure', 'Rpg', 'Shooter', 'Puzzle']
-platforms = ['Pc', 'Playstation', 'Xbox', 'Nintendo']
+genres = ['Action', 'Adventure', 'Rpg', 'Shooter', 'Puzzle', 'Indie', 'Strategy', 'Arcade', 'Platformer', 'Racing', 'Simulation', 'Mmo', 'Sports', 'Fighting']
+platforms = ['Pc', 'Playstation', 'Xbox', 'Nintendo', 'Android', 'Sega']
 games = []
 
 with open('games.csv') as game_csv:
