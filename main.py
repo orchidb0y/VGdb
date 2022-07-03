@@ -5,6 +5,7 @@ from games import *
 from findname import *
 from ratingmap import *
 from datemap import *
+from linkedlist import *
 
 class Main:
 
@@ -34,6 +35,8 @@ class Main:
                 self.by_rating()
             if opt == '3':
                 self.by_release()
+            if opt == '4':
+                self.by_genre()
         
         else:
             print('\nThank you for using VGdb!')
@@ -48,6 +51,8 @@ class Main:
             self.by_rating()
         if opt == '3':
             self.by_release()
+        if opt == '4':
+            self.by_genre()
     
     def by_name(self):
         name_map = HashMap(500)
@@ -163,6 +168,53 @@ Release date: {game[1]}
 ''')
 
         self.cont()
+
+    def by_genre(self):
+        genre_list = {}
+
+        for genre in genres:
+            genre_list[genre] = LinkedList()
+
+        for game in games:
+            for genre in game['Genres']:
+                genre_list[genre].insert_beginning(game)
+        
+        pick = input(f'\nChoose a genre from this list: {genres}. Enter your choice: ')
+
+        while True:
+            if pick in genres:
+                break
+            else:
+                pick = input(f'''\nYou picked an invalid genre. Please enter a genre in this list: {genres}.
+Enter your choice: ''')
+        
+        print('\nThe game will return 10 games that match the genre you picked.')
+        remaining = 10
+        list_of_games = []
+
+        current_node = genre_list[pick].get_head_node()
+        list_of_games.append(current_node.value)
+        remaining -= 1
+
+        while remaining > 0:
+            current_node = current_node.get_next_node()
+            if current_node.value != None:
+                list_of_games.append(current_node.value)
+                remaining -= 1
+            else:
+                break
+
+        for game in list_of_games:
+            print(f'''
+        Name: {game['Name']}
+Release date: {game['Release date']}
+      Rating: {game['Rating']}
+      Genres: {game['Genres']}
+   Platforms: {game['Platforms']}
+''')
+
+        self.cont()
+
 
 
 system('cls' if osname == 'nt' else 'clear')
