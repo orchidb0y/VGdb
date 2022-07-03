@@ -28,12 +28,15 @@ class DateMap:
 
         list_of_games = []
 
-        while index <= 515:
+        remaining = 10
+        while index <= 515 and remaining >= 0:
             for game in self.array[index]:
                 # print(f'Getting games from index {index}')
                 if game != None:
                     list_of_games.append(game[1])
+                    remaining -= 1
             index += 1
+            print(f'Index at {index} and {remaining} games remaining')
         
         return list_of_games
 
