@@ -32,6 +32,8 @@ class Main:
                 self.by_name()
             if opt == '2':
                 self.by_rating()
+            if opt == '3':
+                self.by_release()
         
         else:
             print('\nThank you for using VGdb!')
@@ -159,6 +161,8 @@ Release date: {game[1]}
       Genres: {game[3]}
    Platforms: {game[4]}
 ''')
+
+        self.cont()
 
 
 system('cls' if osname == 'nt' else 'clear')
