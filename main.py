@@ -21,7 +21,12 @@ class Main:
 4) Search by genre
 5) Search by platform''')
 
-        return input('\nEnter a number from 1 to 5: ')
+        opt = input('\nEnter a number from 1 to 5: ')
+
+        while opt not in ['1', '2', '3', '4', '5']:
+            opt = input('I didn\'t get that. Enter a number from 1 to 5: ')
+
+        return opt
     
     def cont(self):
         query = input('Would you like to make another search? Enter y/n: ')
@@ -57,9 +62,6 @@ class Main:
             self.by_genre()
         if opt == '5':
             self.by_platform()
-        if opt not in ['1', '2', '3', '4', '5']:
-            print('You entered an invalid choice. Try again.')
-            self.start()
     
     def by_name(self):
         name_map = HashMap(500)
