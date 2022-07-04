@@ -27,6 +27,6 @@ Choose a genre from the list that will be provided and enter it (not case sensit
 Choose a platform from the list that will be provided and enter it (not case sensitive). The program will return a list of at most 10 games that run on the chosen platform.
 
 ## Search results completeness
-The database of games used by the program is hundreds of games long. This means that restricting the search results to 10 games could prevent the program from showing new games to the user should he repeat the search with the same parameters.
+The database of games used by the program is hundreds of games long. This means that restricting the search results to 10 games could prevent the program from showing new games to the user should they repeat the search with the same parameters.
 
-In other to go around that problem, the program will shuffle the list of results and pick the 10 first games, so that every search returns a different result.
+In order to go around that problem, the program will shuffle the list of results and pick the 10 first games, so that every search returns a different result.
