@@ -8,18 +8,6 @@ class HashMap:
         self.array = [None for item in range(size)]
         self.empty = True
 
-    def __iter__(self):
-        self.n = 0
-        return self 
-
-    def __next__(self):
-        if self.n <= self.size:
-            result = self.array[self.n - 1]
-            self.n += 1
-            return result
-        else:
-            raise StopIteration
-
     def hash(self, key, coll_count = 0):
         key_bytes = key.encode()
         hash_code = sum(key_bytes)
