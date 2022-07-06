@@ -57,7 +57,7 @@ class Main:
         results = findname(name, name_list, matching_list=results)
         
         if results == []:
-            return '\nCouldn\'t find with any game matching your search query!'
+            print('\nCouldn\'t find with any game matching your search query!')
         else:
             print('\nHere are the results for your search:')
             for game in results:
