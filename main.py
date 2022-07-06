@@ -11,6 +11,7 @@ from linkedlist import *
 class Main:
 
     def __init__(self):
+        self.func = ['self.by_name()', 'self.by_rating()', 'self.by_release()', 'self.by_genre()', 'self.by_platform()']
         self.start()
 
     def get_option(self):
@@ -26,42 +27,20 @@ class Main:
         while opt not in ['1', '2', '3', '4', '5']:
             opt = input('I didn\'t get that. Enter a number from 1 to 5: ')
 
-        return opt
+        return int(opt) - 1
     
     def cont(self):
         query = input('Would you like to make another search? Enter y/n: ')
         if query == 'y':
             system('cls' if osname == 'nt' else 'clear')
             print('What would you like to do now?')
-            opt = self.get_option()
-
-            if opt == '1':
-                self.by_name()
-            if opt == '2':
-                self.by_rating()
-            if opt == '3':
-                self.by_release()
-            if opt == '4':
-                self.by_genre()
-            if opt == '5':
-                self.by_platform()
+            exec(self.func[self.get_option()])
         
         else:
             print('\nThank you for using VGdb!')
 
     def start(self):
-        opt = self.get_option()
-
-        if opt == '1':
-            self.by_name()
-        if opt == '2':
-            self.by_rating()
-        if opt == '3':
-            self.by_release()
-        if opt == '4':
-            self.by_genre()
-        if opt == '5':
-            self.by_platform()
+        exec(self.func[self.get_option()])
     
     def by_name(self):
         name_map = HashMap(500)
